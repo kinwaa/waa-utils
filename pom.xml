@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+   xmlns="http://maven.apache.org/POM/4.0.0"
+
+   xsi:schemaLocation="
+      http://maven.apache.org/POM/4.0.0
+      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+   <modelVersion>4.0.0</modelVersion>
+
+   <groupId>cc.waa.java</groupId>
+   <artifactId>waa-utils</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+
+   <name>Waa Java Utilities Package</name>
+
+   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+      <java.version>11</java.version>
+   </properties>
+
+   <build>
+      <finalName>waa-utils</finalName>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+               <source>${java.version}</source>
+               <target>${java.version}</target>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <version>3.1.2</version>
+            <dependencies>
+               <dependency>
+                  <groupId>com.puppycrawl.tools</groupId>
+                  <artifactId>checkstyle</artifactId>
+                  <version>8.42</version>
+               </dependency>
+            </dependencies>
+            <executions>
+               <execution>
+                  <id>checkstyle</id>
+                  <phase>validate</phase>
+                  <goals>
+                     <goal>check</goal>
+                  </goals>
+                  <configuration>
+                     <failOnViolation>true</failOnViolation>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+   </build>
+
+   <dependencies>
+      <dependency>
+         <groupId>commons-codec</groupId>
+         <artifactId>commons-codec</artifactId>
+         <version>1.15</version>
+      </dependency>
+   </dependencies>
+</project>
