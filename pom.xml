@@ -58,6 +58,19 @@
                </execution>
             </executions>
          </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>3.2.1</version>
+            <executions>
+               <execution>
+                  <id>attach-sources</id>
+                  <goals>
+                     <goal>jar</goal>
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
       </plugins>
    </build>
 
@@ -73,4 +86,15 @@
          <version>2.8.0</version>
       </dependency>
    </dependencies>
+
+   <distributionManagement>
+      <repository>
+         <id>rdc-releases</id>
+         <url>https://repo.rdc.aliyun.com/repository/125303-release-Y5LhzA/</url>
+      </repository>
+      <snapshotRepository>
+         <id>rdc-snapshots</id>
+         <url>https://repo.rdc.aliyun.com/repository/125303-snapshot-gTn4fF/</url>
+      </snapshotRepository>
+   </distributionManagement>
 </project>
