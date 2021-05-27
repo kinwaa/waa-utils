@@ -86,9 +86,9 @@ public final class JpaUtils {
                }
 
                // 判断sql结束
-               if (curLine.indexOf(';') >= 0) {
-                  appendContent(sql, trim(substringBefore(curLine, ';')));
-                  curLine = substringAfter(curLine, ';');
+               if (curLine.indexOf(";") >= 0) {
+                  appendContent(sql, trim(substringBefore(curLine, ";")));
+                  curLine = substringAfter(curLine, ";");
 
                   result.add(sql.toString());
                   sql.delete(0, sql.length());
@@ -116,15 +116,22 @@ public final class JpaUtils {
    public static int executeScript(final EntityManagerFactory factory,
                                    final InputStream resourceStream)
          throws IOException {
+      String[] sqls = splitSql(resourceStream);
+
+      if (sqls == null || sqls.length <= 0) {
+         return 0;
+      }
+
       EntityManager em = null;
 
       try {
          em = factory.createEntityManager();
-
          em.getTransaction().begin();
-         for (String sql : splitSql(resourceStream)) {
+
+         for (String sql : sqls) {
             em.createNativeQuery(sql).executeUpdate();
          }
+
          em.getTransaction().commit();
       } finally {
          em.close();
