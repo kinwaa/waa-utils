@@ -21,6 +21,9 @@ buildNumber.properties
 .idea/
 *.iml
 
+# Visual Studio Code
+.vscode/
+
 .factorypath
 
 /sqls/

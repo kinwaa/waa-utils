@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import org.hibernate.HibernateException;
 import org.hibernate.MappingException;
+import org.hibernate.engine.config.spi.ConfigurationService;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.Configurable;
 import org.hibernate.id.IdentifierGenerator;
@@ -30,21 +31,34 @@ import lombok.extern.slf4j.Slf4j;
 public final class SnowFlakeIdGenerator
    implements IdentifierGenerator, Configurable {
 
+   /** id在配置中的键. */
+   private static final String KEY_OF_WORKER_ID =
+                                            "waa-utils.id.snow-flake.worker-id";
+
    /** idWorker. */
-   private final SnowFlakeIdWorker idWorker = new SnowFlakeIdWorker();
+   private static SnowFlakeIdWorker idWorker;
 
    @Override
    public void configure(final Type type, final Properties params,
                          final ServiceRegistry serviceRegistry)
          throws MappingException {
-      log.info("配置SnowFlakeIdGenerator");
-      // TOOD 须按实际情况配置具体的idWorker
+      if (idWorker == null) {
+         log.info("正在配置SnowFlakeIdGenerator...");
+
+         ConfigurationService configService = serviceRegistry.getService(
+                                                    ConfigurationService.class);
+
+         String workerId = configService.getSetting(KEY_OF_WORKER_ID,
+                                                    String.class, "0");
+
+         idWorker = new SnowFlakeIdWorker(Long.parseLong(workerId));
+      }
    }
 
    @Override
    public Serializable generate(final SharedSessionContractImplementor s,
                                 final Object object)
          throws HibernateException {
-      return this.idWorker.nextId().present();
+      return idWorker.nextId().present();
    }
 }
