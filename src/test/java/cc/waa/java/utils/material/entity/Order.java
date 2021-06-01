@@ -29,6 +29,11 @@ import lombok.Setter;
 @Getter @Setter
 public class Order implements Serializable {
 
+   /** serialVersionUID. */
+   private static final long serialVersionUID = 3962407833970223344L;
+
+
+
    @Id
    @GeneratedValue(generator = "snow-flake")
    @Column(name = "pk_id")
