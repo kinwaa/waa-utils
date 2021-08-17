@@ -6,6 +6,11 @@
  */
 package cc.waa.java.utils.lang;
 
+import java.util.Calendar;
+import java.util.Date;
+
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 /**
  * 汇集多种格式化方法，以便同时import使用.
  *
@@ -15,6 +20,24 @@ package cc.waa.java.utils.lang;
  * @since   0.0.1
  */
 public final class FormatUtils {
+
+   /**
+    * @param calendar
+    * @param pattern
+    * @return 已格式化的日期字符串
+    */
+   public static String format(final Calendar calendar, final String pattern) {
+      return DateFormatUtils.format(calendar, pattern);
+   }
+
+   /**
+    * @param date
+    * @param pattern
+    * @return 已格式化的日期字符串
+    */
+   public static String format(final Date date, final String pattern) {
+      return DateFormatUtils.format(date, pattern);
+   }
 
    /**
     * 格式化字符串.

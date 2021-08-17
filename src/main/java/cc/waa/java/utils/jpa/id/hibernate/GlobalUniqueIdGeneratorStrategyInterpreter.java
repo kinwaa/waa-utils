@@ -15,6 +15,8 @@ import javax.persistence.TableGenerator;
 import org.hibernate.boot.model.IdGeneratorStrategyInterpreter;
 import org.hibernate.boot.model.IdentifierGeneratorDefinition.Builder;
 
+import cc.waa.java.utils.NotImplementedException;
+
 /**
  * @author  Kinwaa
  *
@@ -44,12 +46,12 @@ public final class GlobalUniqueIdGeneratorStrategyInterpreter
    @Override
    public void interpretTableGenerator(final TableGenerator annotation,
                                        final Builder definitionBuilder) {
-      // TODO Auto-generated method stub
+      throw new NotImplementedException();
    }
 
    @Override
    public void interpretSequenceGenerator(final SequenceGenerator annotation,
                                           final Builder definitionBuilder) {
-      // TODO Auto-generated method stub
+      throw new NotImplementedException();
    }
 }
