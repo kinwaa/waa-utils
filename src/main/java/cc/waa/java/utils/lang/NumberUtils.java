@@ -7,7 +7,11 @@
 package cc.waa.java.utils.lang;
 
 import static java.lang.Integer.parseInt;
+import static java.util.regex.Pattern.compile;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
+import static org.apache.commons.lang3.StringUtils.remove;
+
+import java.util.regex.Pattern;
 
 /**
  * @author  Kinwaa
@@ -16,6 +20,9 @@ import static org.apache.commons.lang3.StringUtils.isNumeric;
  * @since   0.0.1
  */
 public final class NumberUtils {
+
+   /** 含千分位数字的正则表达式对象. */
+   private static final Pattern PAT_THOUSANDS = compile("\\d{1,3}(,\\d{3})*");
 
    /**
     * 将不同对象转化为int类型.
@@ -32,6 +39,9 @@ public final class NumberUtils {
 
          if (isNumeric(cs)) {
             return parseInt(cs.toString());
+         } else if (PAT_THOUSANDS.matcher(cs).matches()) {
+            // 准确处理含千分位的数字
+            return parseInt(remove(cs.toString(), ','));
          }
       }
 

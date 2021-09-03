@@ -35,10 +35,13 @@ public class NumberUtilsTest {
    public static Collection<Object[]> prepareData() {
       List<Object[]> params = new ArrayList<>();
 
-      params.add(new Object[] { 1, "123", 123 });
-      params.add(new Object[] { 1, 456, 456 });
-      params.add(new Object[] { 1, new BigDecimal("9876"), 9876 });
-      params.add(new Object[] { 1, "avc", 0 });
+      params.add(new Object[] { 3, "123", 123, 0 });
+      params.add(new Object[] { 3, 456, 456, 0 });
+      params.add(new Object[] { 3, new BigDecimal("9876"), 9876, 0 });
+      params.add(new Object[] { 3, "avc", 0, 0 });
+      params.add(new Object[] { 3, "1,234", 1234, 0 });
+      params.add(new Object[] { 3, "987,876,123", 987876123, 0 });
+      params.add(new Object[] { 2, "1,56,987", 1, 1 });
 
       return params;
    }
@@ -49,10 +52,19 @@ public class NumberUtilsTest {
 
    private final int expected;
 
+   private final int defaultValue;
+
    @Test
    public void intOfTest() {
       if ((this.control & 1) == 1) {
-         assertEquals(expected, intOf(value));
+         assertEquals(this.expected, intOf(this.value));
+      }
+   }
+
+   @Test
+   public void intOfWithDefaultValueTest() {
+      if ((this.control & 2) == 2) {
+         assertEquals(this.expected, intOf(this.value, this.defaultValue));
       }
    }
 }
