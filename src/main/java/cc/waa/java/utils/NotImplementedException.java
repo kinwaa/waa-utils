@@ -13,4 +13,7 @@ package cc.waa.java.utils;
  * @since   0.0.1
  */
 public class NotImplementedException extends RuntimeException {
+
+   /** serialVersionUID. */
+   private static final long serialVersionUID = 5867356350961824106L;
 }

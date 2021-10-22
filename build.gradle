@@ -1,0 +1,27 @@
+
+plugins {
+   id 'java'
+}
+
+group = 'cc.waa.java'
+version = '0.0.2-RELEASE'
+sourceCompatibility = '11'
+
+tasks.withType(JavaCompile) {
+   options.encoding = "UTF-8"
+}
+
+repositories {
+   maven { url 'https://maven.aliyun.com/nexus/content/groups/public' }
+}
+
+dependencies {
+   implementation 'org.apache.commons:commons-lang3:3.12.0'
+   implementation 'commons-codec:commons-codec:1.15'
+   implementation 'jakarta.persistence:jakarta.persistence-api:2.2.3' // provided
+   implementation 'org.hibernate:hibernate-core:5.4.32.Final'
+}
+
+wrapper {
+   gradleVersion = '7.2'
+}
