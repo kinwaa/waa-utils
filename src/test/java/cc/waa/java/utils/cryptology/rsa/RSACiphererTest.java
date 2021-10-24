@@ -57,4 +57,18 @@ public class RSACiphererTest {
          fail("加/解密失败");
       }
    }
+
+   @Test
+   public void testDecryptFromBase64() {
+      String data = "U4ZT5EbTsasc5zxcsy/Zu2m50xjmRdvMPWeH0S/9NifGGta7bZl15bRaEixiFR3pUCayTdFeR1s3pgzwTx4o2gTJf5ylKs0FlXyQWDjGLKYN+yPbeiiqzL2wf7t7kez+wGPK9b8QWYHpcsachaU5tG0+gbDjs0+zVlrsOgge+kk=";
+      byte[] raw;
+
+      try {
+         raw = this.master.decryptFromBase64(data);
+
+         assertEquals("123456", new String(raw, UTF_8));
+      } catch (GeneralSecurityException e) {
+         fail("加/解密失败");
+      }
+   }
 }
