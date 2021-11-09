@@ -19,24 +19,26 @@ import java.io.OutputStream;
 public final class IOUtils {
 
    /** 默认的缓冲大小（8KB）. */
-   private static final int BUFFER_SIZE = 8192;
+   private static final int DEFAULT_BUFFER_SIZE = 8192;
 
    /**
     * 将一个InputStream的数据同时复制到多个OutputStream去.
     *
     * @param is 用于读取数据的InputStram
+    * @param bufferSize 指定缓冲区大小
     * @param oss 可以写入到多个OutputStream。没有传入任何OutputStream也不会抛出异常，只是返回0L
     * @return 总共复制了的字节数（并非多个OutputStream实例的总数，只按InputStream的读取数量）
     * @throws IOException
     */
-   public static long copyMulti(final InputStream is, final OutputStream... oss)
+   public static long copyMulti(final InputStream is, final int bufferSize,
+                                final OutputStream... oss)
          throws IOException {
       if (oss == null || oss.length <= 0) {
          return 0L;
       }
 
       long count = 0;
-      byte[] buffer = new byte[BUFFER_SIZE];
+      byte[] buffer = new byte[bufferSize];
       int readed = 0;
 
       while ((readed = is.read(buffer)) > 0) {
@@ -48,6 +50,19 @@ public final class IOUtils {
       }
 
       return count;
+   }
+
+   /**
+    * 将一个InputStream的数据同时复制到多个OutputStream去.
+    *
+    * @param is 用于读取数据的InputStram
+    * @param oss 可以写入到多个OutputStream。没有传入任何OutputStream也不会抛出异常，只是返回0L
+    * @return 总共复制了的字节数（并非多个OutputStream实例的总数，只按InputStream的读取数量）
+    * @throws IOException
+    */
+   public static long copyMulti(final InputStream is, final OutputStream... oss)
+         throws IOException {
+      return copyMulti(is, DEFAULT_BUFFER_SIZE, oss);
    }
 
 
