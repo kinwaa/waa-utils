@@ -12,7 +12,7 @@
 
    <groupId>cc.waa.java</groupId>
    <artifactId>waa-utils</artifactId>
-   <version>0.0.4-RELEASE</version>
+   <version>0.0.5-SNAPSHOT</version>
 
    <name>Waa Java Utilities Package</name>
 
